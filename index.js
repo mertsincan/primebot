@@ -1,4 +1,4 @@
-import { context, getOctokit } from '@actions/github';
+const { context, getOctokit } = require('@actions/github');
 
 const TOKEN = process.env.GITHUB_TOKEN;
 
