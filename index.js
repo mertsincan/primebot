@@ -2,9 +2,8 @@ const { context, getOctokit } = require('@actions/github');
 
 const TOKEN = process.env.GITHUB_TOKEN;
 
-// Botun kullanıcı adı ve avatar URL'si
-const BOT_USERNAME = process.env.BOT_USERNAME || 'primebot'; // Botun kullanıcı adı
-const BOT_AVATAR_URL = process.env.BOT_AVATAR_URL || 'https://your-avatar-url-here.com'; // Avatar URL'si
+const BOT_USERNAME = process.env.BOT_USERNAME || 'primebot'; 
+const BOT_AVATAR_URL = process.env.BOT_AVATAR_URL || 'https://gravatar.com/mertsincan';
 
 async function addComment(type, number, body) {
     const octokit = getOctokit(TOKEN);
