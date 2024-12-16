@@ -6,7 +6,7 @@ const BOT_USERNAME = process.env.BOT_USERNAME || 'primebot';
 const BOT_AVATAR_URL = process.env.BOT_AVATAR_URL || 'https://gravatar.com/mertsincan';
 
 async function addComment(type, number, body) {
-    const octokit = getOctokit(TOKEN);
+    const octokit = getOctokit({auth: TOKEN });
 
     try {
         if (type === 'issue') {
