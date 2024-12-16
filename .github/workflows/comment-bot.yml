@@ -48,7 +48,7 @@ jobs:
           } else if (label === 'documentation') {
             comment = 'Documentation is missing.';
           } else if (label === 'help wanted') {
-            comment = 'Due to PrimeTek team's busy roadmap, this issue is available for anyone to work on. [**Make sure to reference this issue in your pull request.**](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) :sparkles: Thank you for your contribution! :sparkles:';
+            comment = 'Due to PrimeTek team\\'s busy roadmap, this issue is available for anyone to work on. [**Make sure to reference this issue in your pull request.**](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) :sparkles: Thank you for your contribution! :sparkles:';
           }
 
           if (comment) {
