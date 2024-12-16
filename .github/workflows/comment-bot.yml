@@ -1,0 +1,56 @@
+name: Issue and PR Comment Bot
+
+on:
+  issues:
+    types: [labeled]
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+jobs:
+  issue-pr-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Add Comment to Issue or PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BOT_USERNAME: "PrimeBot"
+          BOT_AVATAR_URL: "https://gravatar.com/mertsincan"
+        run: |
+          node -e "
+          const { context } = require('@actions/github');
+          const { addComment } = require('./index');
+
+          const isIssue = !!context.payload.issue;
+          const isPR = !!context.payload.pull_request;
+
+          const label = context.payload.label.name;
+          const number = isIssue ? context.payload.issue.number : context.payload.pull_request.number;
+
+          let comment;
+          if (label === 'bug') {
+            comment = 'BUG: Please provide more details.';
+          } else if (label === 'documentation') {
+            comment = 'Documentation is missing.';
+          } else if (label === 'Duplicate') {
+            comment = 'This has been marked as a duplicate.';
+          }
+
+          if (comment) {
+            const type = isIssue ? 'issue' : 'pr';
+            addComment(type, number, comment);
+          }
+          "
