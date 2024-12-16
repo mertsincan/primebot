@@ -8,10 +8,10 @@ const BOT_AVATAR_URL = process.env.BOT_AVATAR_URL || 'https://your-avatar-url-he
 
 async function addComment(type, number, body) {
     const octokit = getOctokit(TOKEN);
-console.log(TOKEN, octokit)
+
     try {
         if (type === 'issue') {
-            await octokit.issues.createComment({
+            await octokit.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: number,
@@ -22,7 +22,7 @@ console.log(TOKEN, octokit)
                 }
             });
         } else if (type === 'pr') {
-            await octokit.pulls.createReviewComment({
+            await octokit.rest.pulls.createReview({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: number,
