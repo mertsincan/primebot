@@ -1,12 +1,12 @@
 const { context, getOctokit } = require('@actions/github');
 
-const TOKEN = process.env.PERSONAL_ACCESS_TOKEN;
+const TOKEN = process.env.PERSONAL_ACCESS_TOKEN || process.env.GITHUB_TOKEN;
 
 const BOT_USERNAME = process.env.BOT_USERNAME || 'primebot'; 
 const BOT_AVATAR_URL = process.env.BOT_AVATAR_URL || 'https://gravatar.com/mertsincan';
 
 async function addComment(type, number, body) {
-    const octokit = getOctokit({auth: TOKEN });
+    const octokit = getOctokit(TOKEN);
 
     try {
         if (type === 'issue') {
