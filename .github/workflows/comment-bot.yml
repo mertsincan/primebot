@@ -28,7 +28,7 @@ jobs:
 
       - name: Add Comment to Issue or PR
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           BOT_USERNAME: "PrimeBot"
           BOT_AVATAR_URL: "https://gravatar.com/mertsincan"
         run: |
