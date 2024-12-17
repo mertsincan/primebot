@@ -1,15 +1,33 @@
 {
-  "name": "primebot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@actions/core": "^1.10.0",
-    "@actions/github": "^5.1.1"
-  }
+    "name": "primebot",
+    "version": "1.0.0",
+    "author": "PrimeTek Informatics",
+    "description": "...",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "main": "index.js",
+    "scripts": {
+        "setup": "npx rimraf ./node_modules ./dist ./package-lock.json && npm run init",
+        "init": "npm install && husky",
+        "build": "tsc",
+        "start": "npm run build && node dist/index.js",
+        "format": "prettier --write \"**/*.{js,mjs,ts,mts,d.ts,json}\" --cache"
+    },
+    "devDependencies": {
+        "lint-staged": "^12.0.0",
+        "prettier": "^3.0.0",
+        "husky": "^9.1.6",
+        "typescript": "5.7.2"
+    },
+    "dependencies": {
+        "@actions/core": "^1.10.0",
+        "@actions/github": "^5.1.1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "**/*.{js,mjs,ts,mts,d.ts,html}": ["prettier --write"]
+    }
 }
