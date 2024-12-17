@@ -1,1 +1,1 @@
-# primebot
+# PrimeBot
