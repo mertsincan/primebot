@@ -27,32 +27,7 @@ jobs:
         run: npm install
 
       - name: Add Comment to Issue or PR
-        env:
-          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          BOT_USERNAME: "PrimeBot"
-          BOT_AVATAR_URL: "https://gravatar.com/mertsincan"
-        run: |
-          node -e "
-          const { context } = require('@actions/github');
-          const { addComment } = require('./index');
+        uses: ./action
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
-          const isIssue = !!context.payload.issue;
-          const isPR = !!context.payload.pull_request;
-
-          const label = context.payload.label.name;
-          const number = isIssue ? context.payload.issue.number : context.payload.pull_request.number;
-
-          let comment;
-          if (label === 'bug') {
-            comment = 'BUG: Please provide more details.';
-          } else if (label === 'documentation') {
-            comment = 'Documentation is missing.';
-          } else if (label === 'help wanted') {
-            comment = 'Due to PrimeTek team\\'s busy roadmap, this issue is available for anyone to work on. [**Make sure to reference this issue in your pull request.**](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) :sparkles: Thank you for your contribution! :sparkles:';
-          }
-
-          if (comment) {
-            const type = isIssue ? 'issue' : 'pr';
-            addComment(type, number, comment);
-          }
-          "

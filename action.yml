@@ -1,0 +1,9 @@
+name: 'Issue and PR Comment Bot'
+description: '....'
+inputs:
+  token:
+    description: 'GitHub token'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

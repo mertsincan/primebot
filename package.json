@@ -13,9 +13,10 @@
         "format": "prettier --write \"**/*.{js,mjs,ts,mts,d.ts,json}\" --cache"
     },
     "devDependencies": {
+        "@types/node": "^22.10.2",
+        "husky": "^9.1.6",
         "lint-staged": "^12.0.0",
         "prettier": "^3.0.0",
-        "husky": "^9.1.6",
         "typescript": "5.7.2"
     },
     "dependencies": {
@@ -28,6 +29,8 @@
         }
     },
     "lint-staged": {
-        "**/*.{js,mjs,ts,mts,d.ts,html}": ["prettier --write"]
+        "**/*.{js,mjs,ts,mts,d.ts,html}": [
+            "prettier --write"
+        ]
     }
 }
