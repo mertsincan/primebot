@@ -24,7 +24,7 @@ async function run() {
                 body: commentBody
             });
 
-            core.debug('Comment added for missing template sections.');
+            core.info(data.data.html_url);
         }
 
         /*if (missingSections.length > 0) {
