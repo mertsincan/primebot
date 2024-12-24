@@ -11,7 +11,7 @@ async function run() {
         const issueNumber = context.payload.issue?.number;
         const repo = context.repo;
 
-        const commentBody = `Thank you! 🙌`;
+        const commentBody = `Thank you ! 🙌`;
 
         if (issueNumber !== undefined) {
             await octokit.rest.issues.createComment({
