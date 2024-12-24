@@ -8,7 +8,7 @@ async function run() {
         const context = github.context;
 
         const issueBody = context.payload.issue?.body || '';
-        const issueNumber = context.payload.issue?.number;
+        const issueNumber = context.payload.issue?.number || context.payload.pull_request?.number;
         const repo = context.repo;
 
         const commentBody = `Thank you ! 🙌`;
