@@ -14,11 +14,17 @@ async function run() {
         const commentBody = `Thank you ! 🙌`;
 
         if (issueNumber !== undefined) {
+            const data = await octokit.rest.issues.get({
+                ...repo,
+                issue_number: issueNumber
+            });
             await octokit.rest.issues.createComment({
                 ...repo,
                 issue_number: issueNumber,
                 body: commentBody
             });
+
+            core.info(data?.data?.body || '');
         }
 
         /*if (missingSections.length > 0) {

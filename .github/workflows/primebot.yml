@@ -22,4 +22,3 @@ jobs:
         uses: ./ # Uses an action in the root directory
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-
