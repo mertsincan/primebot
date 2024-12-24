@@ -8,7 +8,7 @@
     "scripts": {
         "setup": "npx rimraf ./node_modules ./dist ./package-lock.json && npm run init",
         "init": "npm install && husky",
-        "build": "tsup src/index.ts --minify --format cjs --out-dir dist",
+        "build": "tsup",
         "start": "npm run build && node dist/index.js",
         "format": "prettier --write \"**/*.{js,mjs,ts,mts,d.ts,json}\" --cache"
     },
