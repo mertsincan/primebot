@@ -8,7 +8,7 @@
     "scripts": {
         "setup": "npx rimraf ./node_modules ./dist ./package-lock.json && npm run init",
         "init": "npm install && husky",
-        "build": "tsc",
+        "build": "tsup src/index.ts --minify --format cjs --out-dir dist",
         "start": "npm run build && node dist/index.js",
         "format": "prettier --write \"**/*.{js,mjs,ts,mts,d.ts,json}\" --cache"
     },
@@ -17,7 +17,8 @@
         "husky": "^9.1.6",
         "lint-staged": "^12.0.0",
         "prettier": "^3.0.0",
-        "typescript": "5.7.2"
+        "typescript": "5.7.2",
+        "tsup": "^8.3.5"
     },
     "dependencies": {
         "@actions/core": "^1.10.0",
