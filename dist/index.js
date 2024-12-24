@@ -46,15 +46,15 @@ const core = __importStar(require("@actions/core"));
 const github = __importStar(require("@actions/github"));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        var _a, _b;
+        var _a, _b, _c;
         try {
             const TOKEN = core.getInput('token');
             const octokit = github.getOctokit(TOKEN);
             const context = github.context;
             const issueBody = ((_a = context.payload.issue) === null || _a === void 0 ? void 0 : _a.body) || '';
-            const issueNumber = (_b = context.payload.issue) === null || _b === void 0 ? void 0 : _b.number;
+            const issueNumber = ((_b = context.payload.issue) === null || _b === void 0 ? void 0 : _b.number) || ((_c = context.payload.pull_request) === null || _c === void 0 ? void 0 : _c.number);
             const repo = context.repo;
-            const commentBody = `Thank you! 🙌`;
+            const commentBody = `Thank you ! 🙌`;
             if (issueNumber !== undefined) {
                 yield octokit.rest.issues.createComment(Object.assign(Object.assign({}, repo), { issue_number: issueNumber, body: commentBody }));
             }
