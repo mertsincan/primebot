@@ -24,7 +24,7 @@ async function run() {
                 body: commentBody
             });
 
-            core.info(data.data.html_url);
+            core.info(data.data.url);
         }
 
         /*if (missingSections.length > 0) {
