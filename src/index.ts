@@ -24,12 +24,6 @@ async function run() {
                 body: commentBody
             });
 
-            await octokit.rest.issues.update({
-                ...repo,
-                issue_number: issueNumber,
-                milestone: 'v1.0.0'
-            });
-
             // Milestone'ları al
             const milestones = await octokit.rest.issues.listMilestones({
                 ...repo,
