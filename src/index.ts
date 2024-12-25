@@ -30,19 +30,7 @@ async function run() {
                 state: 'open'
             });
 
-            const events = await octokit.rest.issues.listEvents({
-                ...repo,
-                issue_number: issueNumber
-            });
-
-            // Etkinliklerde 'connected' türünde bir event var mı kontrol et
-            const linkedPR = events.data.find((event) => event.event === 'connected');
-
-            if (linkedPR) {
-                core.info(`This issue is linked to PR: ${linkedPR.url}`);
-            } else {
-                core.info('No pull request is linked to this issue.');
-            }
+            core.info(`PR: ${data.data.pull_request?.url}`);
 
             // 'v1.0.0' adlı milestone'u bul
             const milestone = milestones.data.find((m) => m.title === 'v1.0.0');
