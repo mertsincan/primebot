@@ -36,7 +36,7 @@ async function run() {
 
             // Proje ID'sini bul
             const projectId = projects.data.find((p) => p.name === 'Test')?.id;
-
+            core.info(`Project ID: ${projectId}`);
             const columns = await octokit.rest.projects.listColumns({
                 project_id: projectId!
             });
