@@ -6,10 +6,7 @@ on:
     pull_request:
         types: [labeled]
 
-permissions:
-    issues: write
-    pull-requests: write
-    contents: read
+permissions: write-all
 
 jobs:
     issue-pr-comment:
