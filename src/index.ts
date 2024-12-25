@@ -33,7 +33,7 @@ async function run() {
             const projects = await octokit.rest.projects.listForRepo({
                 ...repo
             });
-
+            core.info(`Projects: ${JSON.stringify(projects.data)}`);
             // Proje ID'sini bul
             const projectId = projects.data.find((p) => p.name === 'Test')?.id;
             core.info(`Project ID: ${projectId}`);
