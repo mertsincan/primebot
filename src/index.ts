@@ -30,6 +30,17 @@ async function run() {
                 state: 'open'
             });
 
+            const projects = await octokit.rest.projects.listForRepo({
+                ...repo
+            });
+
+            // Proje ID'sini bul
+            const projectId = projects.data.find((p) => p.name === 'Test')?.id;
+
+            const columns = await octokit.rest.projects.listColumns({
+                project_id: projectId!
+            });
+
             // 'v1.0.0' adlı milestone'u bul
             const milestone = milestones.data.find((m) => m.title === 'v1.0.0');
 
@@ -38,7 +49,14 @@ async function run() {
                 await octokit.rest.issues.update({
                     ...repo,
                     issue_number: issueNumber,
-                    milestone: milestone.number // Milestone ID'sini kullan
+                    milestone: 'v1.0.0'
+                });
+
+                await octokit.rest.projects.createCard({
+                    column_id: columns.data[0].id,
+                    content_id: issueNumber,
+                    content_type: 'Issue',
+                    project_id: projectId
                 });
 
                 core.info(`Milestone updated to v1.0.0`);
