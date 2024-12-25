@@ -30,23 +30,30 @@ async function run() {
                 milestone: 'v1.0.0'
             });
 
-            core.info(data.data.url);
-        }
-
-        /*if (missingSections.length > 0) {
-            // Eksik alanlar varsa kullanıcıyı bilgilendiren bir yorum ekle
-            const commentBody = `⚠️ The following sections are missing or incomplete in your issue:\n\n- ${missingSections.join('\n- ')}\n\nPlease update the issue to follow the required template. Thank you! 🙌`;
-
-            await octokit.rest.issues.createComment({
+            // Milestone'ları al
+            const milestones = await octokit.rest.issues.listMilestones({
                 ...repo,
-                issue_number: issueNumber,
-                body: commentBody
+                state: 'open'
             });
 
-            core.info('Comment added for missing template sections.');
-        } else {
-            core.info('Issue follows the template.');
-        }*/
+            // 'v1.0.0' adlı milestone'u bul
+            const milestone = milestones.data.find((m) => m.title === 'v1.0.0');
+
+            if (milestone) {
+                // Milestone'ı issue'ya ekle
+                await octokit.rest.issues.update({
+                    ...repo,
+                    issue_number: issueNumber,
+                    milestone: milestone.number // Milestone ID'sini kullan
+                });
+
+                core.info(`Milestone updated to v1.0.0`);
+            } else {
+                core.warning('Milestone "v1.0.0" not found.');
+            }
+
+            core.info(data.data.url);
+        }
     } catch (error) {
         core.setFailed(`Action failed: ${(error as Error).message}`);
     }
