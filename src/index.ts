@@ -33,18 +33,7 @@ async function run() {
             // 'v1.0.0' adlı milestone'u bul
             const milestone = milestones.data.find((m) => m.title === 'v1.0.0');
 
-            if (milestone) {
-                // Milestone'ı issue'ya ekle
-                await octokit.rest.issues.update({
-                    ...repo,
-                    issue_number: issueNumber,
-                    milestone: milestone.number // Milestone ID'sini kullan
-                });
-
-                core.info(`Milestone updated to v1.0.0`);
-            } else {
-                core.warning('Milestone "v1.0.0" not found.');
-            }
+            core.info(milestone?.title || 'Milestone not found');
 
             core.info(data.data.url);
         }
