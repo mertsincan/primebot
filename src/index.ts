@@ -24,6 +24,12 @@ async function run() {
                 body: commentBody
             });
 
+            await octokit.rest.issues.update({
+                ...repo,
+                issue_number: issueNumber,
+                milestone: 'v1.0.0'
+            });
+
             core.info(data.data.url);
         }
 
