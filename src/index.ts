@@ -30,16 +30,19 @@ async function run() {
                 state: 'open'
             });
 
-            const projects = await octokit.rest.projects.listForRepo({
-                ...repo
+            const events = await octokit.rest.issues.listEvents({
+                ...repo,
+                issue_number: issueNumber
             });
-            core.info(`Projects: ${JSON.stringify(projects)}`);
-            // Proje ID'sini bul
-            const projectId = projects.data.find((p) => p.name === 'Test')?.id;
-            core.info(`Project ID: ${projectId}`);
-            const columns = await octokit.rest.projects.listColumns({
-                project_id: projectId!
-            });
+
+            // Etkinliklerde 'connected' türünde bir event var mı kontrol et
+            const linkedPR = events.data.find((event) => event.event === 'connected');
+
+            if (linkedPR) {
+                core.info(`This issue is linked to PR: ${linkedPR.url}`);
+            } else {
+                core.info('No pull request is linked to this issue.');
+            }
 
             // 'v1.0.0' adlı milestone'u bul
             const milestone = milestones.data.find((m) => m.title === 'v1.0.0');
@@ -50,13 +53,6 @@ async function run() {
                     ...repo,
                     issue_number: issueNumber,
                     milestone: 'v1.0.0'
-                });
-
-                await octokit.rest.projects.createCard({
-                    column_id: columns.data[0].id,
-                    content_id: issueNumber,
-                    content_type: 'Issue',
-                    project_id: projectId
                 });
 
                 core.info(`Milestone updated to v1.0.0`);
