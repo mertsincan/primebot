@@ -9,6 +9,5 @@ node_modules
 .vscode
 .angular
 *.md
-*.yml
 /tsconfig.json
 /package-lock.json

@@ -10,7 +10,7 @@
         "init": "npm install && husky",
         "build": "tsup",
         "start": "npm run build && node dist/index.js",
-        "format": "prettier --write \"**/*.{js,mjs,ts,mts,d.ts,json}\" --cache"
+        "format": "prettier --write \"**/*.{js,mjs,ts,mts,d.ts,json,yml}\" --cache"
     },
     "devDependencies": {
         "@types/node": "^22.10.2",
@@ -30,8 +30,6 @@
         }
     },
     "lint-staged": {
-        "**/*.{js,mjs,ts,mts,d.ts,html}": [
-            "prettier --write"
-        ]
+        "**/*.{js,mjs,ts,mts,d.ts,html,yml}": ["prettier --write"]
     }
 }
